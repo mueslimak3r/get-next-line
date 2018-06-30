@@ -12,7 +12,7 @@
 
 int	get_next_line(const int fd, char **line)
 {
-	if (line[0]  line[1])
+	if (line[0] && line[1])
 	{
 		free(line[0]);
 		line[0] = ft_strdup(line[1]);
