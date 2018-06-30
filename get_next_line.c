@@ -40,7 +40,7 @@ int	readline(const int fd, int p, char **line)
 	buffer[BUFF + 1] = '\0';
 	while ((temp != '\n') && (buffer))
 	{
-		read(fd, temp, 1);
+		read(fd, &temp, 1);
 		buffer[i++] = temp;
 	}
 	if (!(line[p] = (char*)malloc(sizeof(char) * (i + 1))))
