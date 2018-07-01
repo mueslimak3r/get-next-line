@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/06/30 19:57:21 by calamber         ###   ########.fr       */
+/*   Created: 2018/06/30 19:24:12 by calamber          #+#    #+#             */
+/*   Updated: 2018/06/30 19:57:25 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+# ifndef
+# define
 
-int		get_next_line(const int fd, char **line)
+typedef static struct	s_fd
 {
-	static char **buffer;
+	char				*buffer;
+	const int			fd;
+	struct s_fd			*next;
+}						t_fd
 
-	while (buffer[i])
-	{
+int					get_next_line(const int fd, char **line);
 
-	}
-}
+# endif

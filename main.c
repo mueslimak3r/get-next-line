@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/06/30 19:57:21 by calamber         ###   ########.fr       */
+/*   Created: 2018/06/30 19:26:41 by calamber          #+#    #+#             */
+/*   Updated: 2018/06/30 19:36:27 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-int		get_next_line(const int fd, char **line)
+int		main(void)
 {
-	static char **buffer;
+	const int fd;
+	char	**line;
 
-	while (buffer[i])
-	{
-
-	}
+	fd = 0;
+	get_next_line(fd, line);
+	if (line)
+		printf("%s", line[0]);
+	else
+		printf("line is null");
+	return (0);
 }
