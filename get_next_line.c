@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/05 17:19:11 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/05 20:22:49 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,23 @@ int		get_next_line(const int fd, char **line)
 	{
 		getline(fd, files);
 		n = strchr_int(files[fd], 10);
-		if (!(*line = (char*)malloc(sizeof(char) * (n + 2))))
-			return (0);
-		*line[n + 2] = '\0';
-		*line = ft_strncpy(line, files[fd], (size_t)n);
-
-		swap2 = strsubcpy(line, files[fd], (size_t)((BUFF_SIZE + 1) - n), (size_t)n);
-
+		*line = ft_memalloc(n + 2);
+		*line = ft_strncpy(*line, files[fd], n);
+		swap2 = ft_memalloc(BUFF_SIZE + 1);
+		swap2 = strsubcpy(swap2, files[fd], (BUFF_SIZE - n), n);
+		free(files[fd]);
+		files[fd] = ft_strncpy(files[fd], swap2, (BUFF_SIZE - n));
+		free(swap2);
 		return (1);
 	}
 	else
 	{
-		if (ft_strchr(files[fd]))
-
+		if 
 		else
 		{
 			swap2 = ft_strdup(files[fd]);
 			free(files[fd];
-			swap3 = getnewline(fd, files);
+			swap3 = getline(fd, files);
 			line = ft_strjoin(swap2, swap3);
 			free(swap2);
 			free(swap3);

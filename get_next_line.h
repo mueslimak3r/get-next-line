@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:24:12 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/05 16:54:05 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/05 19:40:44 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@
 
 int					get_next_line(const int fd, char **line);
 int					strchr_int(const char *s, int c); 
+char				*strsubcpy(char *dst, const char *src, size_t len, size_t start);
 
 #endif
