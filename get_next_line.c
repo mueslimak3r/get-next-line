@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/06 03:21:24 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/07 02:01:21 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,21 @@ int		get_next_line(const int fd, char **line)
 		*line = ft_memalloc(n + 2);
 		*line = ft_strncpy(*line, files[fd], n);
 		swap2 = ft_memalloc(BUFF_SIZE + 1);
-		swap2 = strsubcpy(swap2, files[fd], (BUFF_SIZE - n), n);
+		swap2 = strsubcpy(swap2, files[fd], (BUFF_SIZE - (n + 1), n);
 		free(files[fd]);
+		files[fd] = ft_memalloc(BUFF_SIZE - (n + 1));
 		files[fd] = ft_strncpy(files[fd], swap2, (BUFF_SIZE - n));
 		free(swap2);
 		return (1);
 	}
-	else
+	if (files[fd])
 	{
-		if 
-		else
+		n = strchr_int(files[fd], 10);
+		if (n >= 0)
 		{
-			swap2 = ft_strdup(files[fd]);
-			free(files[fd]);
-			getline(fd, files);
-			line = ft_strjoin(swap2, );
-			free(swap2);
+			*line = ft_memalloc(n + 2);
+			*line = strncpy(*line, files[fd], n);
+			
 		}
 	}
 	return (0);
