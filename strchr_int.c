@@ -6,11 +6,13 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 16:50:10 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/05 16:53:48 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/07 18:32:59 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strchr(const char *s, int c)
+#include "get_next_line.h"
+
+int		strchr_int(const char *s, int c)
 {
 	int		i;
 

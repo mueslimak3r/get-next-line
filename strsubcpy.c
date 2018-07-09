@@ -6,10 +6,13 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 17:04:48 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/05 19:41:12 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/07 18:33:21 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-char		*strsubcpy(char *dst, const char *src, size_t len, size_t start)
+
+#include "get_next_line.h"
+
+char		*strsubcpy(char *dst, const char *src, int len, int start)
 {
 	char	*pointer;
 

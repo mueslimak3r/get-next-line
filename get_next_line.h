@@ -6,14 +6,14 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:24:12 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/05 19:40:44 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/07 19:21:55 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <fcntl.h> /*remove later*/
+# include <fcntl.h> /*remove later*/
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,6 +23,6 @@
 
 int					get_next_line(const int fd, char **line);
 int					strchr_int(const char *s, int c); 
-char				*strsubcpy(char *dst, const char *src, size_t len, size_t start);
+char					*strsubcpy(char *dst, const char *src, int len, int start);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:26:41 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/05 16:27:42 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/08 20:08:14 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 int		main(void)
 {
-	int fd;
 	char	*line;
+	int	fd;
 
-	fd = open("file", O_RDONLY);
-	get_next_line(fd, &line);
+	printf("started");
+	fd = open("test", O_RDONLY);
+	printf("%d\n", fd);
+	if (!(get_next_line(fd, &line) == 1))
+		return (0);
 	if (line)
 		printf("%s", line);
 	else

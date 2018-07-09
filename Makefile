@@ -17,7 +17,7 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(FLAGS) -I $(SRC_PATH) libft/libft.h $(OBJ) -o $(NAME) $(LIBFT)
+	@$(CC) $(FLAGS) -I $(SRC_PATH) $(OBJ) -o $(NAME) $(LIBFT)
 
 $(OBJ): $(LIBFT)
 	@$(CC) $(FLAGS) -c $(SRC_POS)
