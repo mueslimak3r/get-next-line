@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:26:41 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/08 20:08:14 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/09 17:01:39 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ int		main(void)
 {
 	char	*line;
 	int	fd;
+	int	i;
 
-	printf("started");
+	printf("started\n");
 	fd = open("test", O_RDONLY);
-	printf("%d\n", fd);
-	if (!(get_next_line(fd, &line) == 1))
-		return (0);
-	if (line)
-		printf("%s", line);
-	else
-		printf("line is null");
+	printf("FD = %d\n", fd);
+	i = get_next_line(fd, &line);
+	printf("First Line: %s\n", line);
+	i = get_next_line(fd, &line);
+	printf("Second Line: %s\n", line);
 	return (0);
 }
