@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/09 17:02:54 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/09 20:01:00 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 void	gnewline(const int fd, char **files)
 {
+	int			i;
+
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
-	read(fd, files[fd], BUFF_SIZE);
+	i = read(fd, files[fd], BUFF_SIZE);
 	return ;
 }
 
-int		strchr_int(const char *s, int c)
+int			strchr_int(const char *s, int c)
 {
 	int		i;
 
@@ -61,6 +63,8 @@ int		get_next_line(const int fd, char **line)
 	char			*swap2;
 	int				n;
 
+	if (fd < 0)
+		return (-1);
 	if (files[fd])
 	{
 		free(*line);
@@ -80,7 +84,6 @@ int		get_next_line(const int fd, char **line)
 	}
 	else
 	{
-		gnewline(fd, files);
 		n = strchr_int(files[fd], 10);
 		if (n >= 0)
 		{
