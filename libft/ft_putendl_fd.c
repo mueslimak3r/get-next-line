@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/30 19:24:12 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/10 00:15:50 by calamber         ###   ########.fr       */
+/*   Created: 2018/05/02 19:22:25 by calamber          #+#    #+#             */
+/*   Updated: 2018/05/03 23:39:49 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "libft/libft.h"
-# define BUFF_SIZE 1
-
-int					get_next_line(const int fd, char **line);
-
-#endif
+void	ft_putendl_fd(char const *s, int fd)
+{
+	if (s)
+	{
+		ft_putstr_fd(s, fd);
+		ft_putchar_fd('\n', fd);
+	}
+}

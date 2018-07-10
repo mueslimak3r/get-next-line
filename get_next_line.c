@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/09 21:13:32 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/10 02:10:56 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ int		get_next_line(const int fd, char **line)
 			files[fd] = ft_strncpy(files[fd], swap2, (BUFF_SIZE - (n + 1)));
 			free(swap2);
 			return (1);
+		}
+		else
+		{
+			
 		}
 	}
 	return (0);

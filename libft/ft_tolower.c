@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/30 19:24:12 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/10 00:15:50 by calamber         ###   ########.fr       */
+/*   Created: 2018/04/28 22:44:55 by calamber          #+#    #+#             */
+/*   Updated: 2018/04/28 22:45:03 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "libft/libft.h"
-# define BUFF_SIZE 1
-
-int					get_next_line(const int fd, char **line);
-
-#endif
+int		ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	else
+		return (c);
+}

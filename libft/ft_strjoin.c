@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/30 19:26:41 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/10 00:13:59 by calamber         ###   ########.fr       */
+/*   Created: 2018/05/04 00:20:34 by calamber          #+#    #+#             */
+/*   Updated: 2018/05/04 16:52:34 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
+#include "libft.h"
 
-int		main(int argc, char **argv)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*line;
-	int	fd;
+	int		i;
+	int		j;
+	char	*str;
 
-	printf("started\n");
-	if (argc == 2)
+	if (!s1 || !s2)
+		return (NULL);
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		fd = open(argv[1], O_RDONLY);
-		printf("FD: %d\n", fd);
-		while (get_next_line(fd, &line) == 1)
-			printf("%s\n", line);
+		str[i] = s1[i];
+		i++;
 	}
-	return (0);
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }

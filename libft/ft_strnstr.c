@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/30 19:24:12 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/10 00:15:50 by calamber         ###   ########.fr       */
+/*   Created: 2018/04/28 22:40:18 by calamber          #+#    #+#             */
+/*   Updated: 2018/04/28 22:40:38 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+{
+	unsigned long	i;
+	int				j;
 
-# include "libft/libft.h"
-# define BUFF_SIZE 1
-
-int					get_next_line(const int fd, char **line);
-
-#endif
+	j = 0;
+	i = 0;
+	if (!*s2)
+		return ((char *)s1);
+	while (s1[i])
+	{
+		j = 0;
+		while (s1[i] == s2[j] && s1[i] && i < n)
+		{
+			i++;
+			j++;
+		}
+		if (!s2[j])
+			return ((char *)&s1[i - j]);
+		i = (i - j) + 1;
+	}
+	return (NULL);
+}
