@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/09 20:01:00 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/09 21:13:32 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 void	gnewline(const int fd, char **files)
 {
-	int			i;
-
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
-	i = read(fd, files[fd], BUFF_SIZE);
+	read(fd, files[fd], BUFF_SIZE);
 	return ;
 }
 
@@ -48,7 +46,7 @@ char		*strsubcpy(char *dst, const char *src, int len, int start)
 		src++;
 		len--;
 	}
-	while (len > 0)
+	while (len > 0 && *dst != '\0')
 	{
 		*dst = '\0';
 		dst++;
@@ -63,30 +61,35 @@ int		get_next_line(const int fd, char **line)
 	char			*swap2;
 	int				n;
 
-	if (fd < 0)
-		return (-1);
 	if (files[fd])
 	{
-		free(*line);
-		n = strchr_int(files[fd], 10);
-		if (n >= 0)
+		if (*line)
 		{
-			*line = ft_memalloc(n + 1);
-			*line = ft_strncpy(*line, files[fd], n);
-			swap2 = ft_memalloc(BUFF_SIZE + 1);
-			swap2 = strsubcpy(swap2, files[fd], (BUFF_SIZE - n), (n + 1));
-			free(files[fd]);
-			files[fd] = ft_memalloc(BUFF_SIZE + 1);
-			files[fd] = ft_strncpy(files[fd], swap2, (BUFF_SIZE - n));
-			free(swap2);
-			return (1);
+			free(*line);
+			n = strchr_int(files[fd], 10);
+			if (n >= 0)
+			{
+				*line = ft_memalloc(n + 1);
+				*line = ft_strncpy(*line, files[fd], n);
+				swap2 = ft_memalloc(BUFF_SIZE + 1);
+				swap2 = strsubcpy(swap2, files[fd], (BUFF_SIZE - n), (n + 1));
+				free(files[fd]);
+				files[fd] = ft_memalloc(BUFF_SIZE + 1);
+				files[fd] = ft_strncpy(files[fd], swap2, (BUFF_SIZE - n));
+				free(swap2);
+				return (1);
+			}
+			if (sizeof(files[fd]) == 0)
+				return (0);
 		}
 	}
 	else
 	{
+		gnewline(fd, files);
 		n = strchr_int(files[fd], 10);
 		if (n >= 0)
 		{
+
 			*line = ft_memalloc(n + 1);
 			*line = ft_strncpy(*line, files[fd], n);
 			swap2 = ft_memalloc(BUFF_SIZE + 1);

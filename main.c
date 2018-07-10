@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:26:41 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/09 19:34:17 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/09 20:54:07 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		main(void)
 	int	fd;
 
 	printf("started\n");
-	fd = open("get_next_line.c", O_RDONLY);
+	fd = open("test", O_RDONLY);
+	printf("FD: %d\n", fd);
 	while (get_next_line(fd, &line) == 1)
 		printf("%s\n", line);
 	return (0);
