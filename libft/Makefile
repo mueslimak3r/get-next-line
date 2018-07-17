@@ -6,7 +6,7 @@
 #    By: calamber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/29 23:01:53 by calamber          #+#    #+#              #
-#    Updated: 2018/05/07 16:34:41 by calamber         ###   ########.fr        #
+#    Updated: 2018/07/17 13:51:44 by calamber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,16 +45,17 @@ ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_wordcnt.o
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	$(CC) -c $(FLAGS) $(include) $(SRCS)
-	$(AR) rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@$(CC) -c $(FLAGS) $(include) $(SRCS)
+	@$(AR) rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -rf $(NAME)
+	@/bin/rm -rf $(NAME)
 
 re: fclean all
+	@/bin/rm -rf $(OBJ)
 
 .PHONY: all clean fclean re
