@@ -67,7 +67,7 @@ char		*strsubcpy(char *dst, const char *src, int len, int start, char c)
 	return (pointer);
 }
 
-void	read_and_combine(const int fd, char **files)
+int	read_and_combine(const int fd, char **files)
 {
 	char	*swap2;
 	char	*swap3;
@@ -76,6 +76,11 @@ void	read_and_combine(const int fd, char **files)
 	swap2 = ft_strcpy(swap2, files[fd]);
 	free(files[fd]);
 	gnewline(fd, files);
+	if (ft_strlen(files[fd]) == 0)
+	{
+		free(swap2);
+		return (0);
+	}
 	swap3 = ft_memalloc(ft_strlen(swap2) + ft_strlen(files[fd]) + 1);
 	swap3 = ft_strcpy(swap3, swap2);
 	swap3 = strsubcpy(swap3, files[fd], (ft_strlen(swap2) + ft_strlen(files[fd])), ft_strlen(swap2), 'd');
@@ -83,6 +88,7 @@ void	read_and_combine(const int fd, char **files)
 	free(files[fd]);
 	files[fd] = ft_memalloc(ft_strlen(swap3) + 1);
 	files[fd] = ft_strcpy(files[fd], swap3);
+	return (1);
 }
 
 int		get_next_line(const int fd, char **line)
@@ -110,7 +116,8 @@ int		get_next_line(const int fd, char **line)
 		}
 		else if (n < 0)
 		{
-			read_and_combine(fd, files);
+			if (read_and_combine(fd, files) == 0)
+				return (0);
 			if (get_next_line(fd, line) == 1)
 				return (1);
 		}
@@ -133,8 +140,8 @@ int		get_next_line(const int fd, char **line)
 		}
 		else
 		{
-			read_and_combine(fd, files);
-			printf("filesfd: %s\n", files[fd]);
+			if (read_and_combine(fd, files) == 0)
+				return (0);
 			if (get_next_line(fd, line) == 1)
 				return (1);
 		}
