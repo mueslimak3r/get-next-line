@@ -12,7 +12,7 @@ LIBFT =	libft/libft.a
 
 CC = gcc
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -fsanitize=address -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -32,6 +32,7 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+	@rm -f $(OBJ)
 
 just: re clean
 
