@@ -76,8 +76,6 @@ int	read_and_combine(const int fd, char **files)
 	swap2 = ft_strcpy(swap2, files[fd]);
 	free(files[fd]);
 	if (gnewline(fd, files) == 0)
-		return (0);
-	if (ft_strlen(files[fd]) == 0)
 	{
 		free(swap2);
 		return (0);
@@ -89,7 +87,10 @@ int	read_and_combine(const int fd, char **files)
 	free(files[fd]);
 	files[fd] = ft_memalloc(ft_strlen(swap3) + 1);
 	files[fd] = ft_strcpy(files[fd], swap3);
-	return (1);
+	free(swap3);
+	if (files[fd][0] != '\0')
+		return (1);
+	return (0);
 }
 
 int		takefrombuffer(const int fd, char **files, char **line)
@@ -124,13 +125,9 @@ int		get_next_line(const int fd, char **line)
 		if (takefrombuffer(fd, files, line) == 1)
 			return (1);
 		else
-		{
 			while (read_and_combine(fd, files) == 1)
-			{
 				if (takefrombuffer(fd, files, line) == 1)
 					return (1);
-			}
-		}
 	}
 	else
 	{
@@ -150,13 +147,9 @@ int		get_next_line(const int fd, char **line)
 			return (1);
 		}
 		else
-		{
 			while (read_and_combine(fd, files) == 1)
-			{
 				if (takefrombuffer(fd, files, line) == 1)
 					return (1);
-			}
-		}
 	}
 	return (0);
 }
