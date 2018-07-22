@@ -70,6 +70,7 @@ int	read_and_combine(const int fd, char **files)
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
 	if (read(fd, files[fd], BUFF_SIZE) == 0)
 	{
+		free(files[fd]);
 		free(swap2);
 		return (0);
 	}
