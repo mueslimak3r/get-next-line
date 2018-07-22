@@ -6,7 +6,7 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/22 01:33:03 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/22 01:43:14 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,15 @@ int				takefrombuffer(const int fd, int n, char **files, char **line)
 	return (0);
 }
 
-int				firstread(const int fd, int n, char **line, char **files)
+int				firstread(const int fd, char **line, char **files)
 {
-	char		*swap2;
+	int			n;
 
+	files[fd] = ft_memalloc(BUFF_SIZE + 1);
+	read(fd, files[fd], BUFF_SIZE);
+	n = strchr_int(files[fd], 10);
 	if (n >= 0)
-	{
-		*line = ft_strsub(files[fd], 0, n);
-		swap2 = ft_strsub(files[fd], n + 1, (ft_strlen(files[fd]) - n));
-		free(files[fd]);
-		files[fd] = ft_strdup(swap2);
-		free(swap2);
-		return (1);
-	}
+		return (takefrombuffer(fd, n, files, line));
 	else
 	{
 		while (read_and_combine(fd, files) == 1)
@@ -116,8 +112,5 @@ int				get_next_line(const int fd, char **line)
 								ft_strlen(files[fd]), files, line));
 		}
 	}
-	files[fd] = ft_memalloc(BUFF_SIZE + 1);
-	read(fd, files[fd], BUFF_SIZE);
-	n = strchr_int(files[fd], 10);
-	return (firstread(fd, n, line, files));
+	return (firstread(fd, line, files));
 }
