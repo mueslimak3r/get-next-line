@@ -6,16 +6,15 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/20 18:45:19 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/22 01:33:03 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-int			strchr_int(const char *s, int c)
+int				strchr_int(const char *s, int c)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (s[i] != (char)c && s[i] != '\0')
@@ -25,81 +24,38 @@ int			strchr_int(const char *s, int c)
 	return (-1);
 }
 
-char		*strsubcpy(char *dst, const char *src, int len, int start, char c)
+int				read_and_combine(const int fd, char **files)
 {
-	char	*pointer;
+	char		*temp;
+	char		*old;
 
-	pointer = dst;
-	if (c)
-	{
-	   if (c == 's')
-		{
-			while (start-- > 0)
-				src++;
-		}
-		if (c == 'd')
-		{
-			while (start-- > 0)
-				dst++;
-		}
-	}
-	while (len > 0 && *src != '\0')
-	{
-		*dst = *src;
-		dst++;
-		src++;
-		len--;
-	}
-	while (len > 0 && *dst != '\0')
-	{
-		*dst = '\0';
-		dst++;
-		len--;
-	}
-	return (pointer);
-}
-
-int	read_and_combine(const int fd, char **files)
-{
-	char	*swap2;
-	char	*swap3;
-
-	swap2 = ft_memalloc(ft_strlen(files[fd]) + 1);
-	swap2 = ft_strcpy(swap2, files[fd]);
+	temp = ft_strdup(files[fd]);
 	free(files[fd]);
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
 	if (read(fd, files[fd], BUFF_SIZE) == 0)
 	{
 		free(files[fd]);
-		free(swap2);
+		files[fd] = ft_strdup(temp);
 		return (0);
 	}
-	swap3 = ft_memalloc(ft_strlen(swap2) + ft_strlen(files[fd]) + 1);
-	swap3 = ft_strcpy(swap3, swap2);
-	swap3 = strsubcpy(swap3, files[fd], (ft_strlen(swap2) + ft_strlen(files[fd])), ft_strlen(swap2), 'd');
-	free(swap2);
+	old = ft_strjoin(temp, files[fd]);
+	free(temp);
 	free(files[fd]);
-	files[fd] = ft_memalloc(ft_strlen(swap3) + 1);
-	files[fd] = ft_strcpy(files[fd], swap3);
-	free(swap3);
-	if (files[fd][0] != '\0')
-		return (1);
-	return (0);
+	files[fd] = ft_strdup(old);
+	free(old);
+	return (1);
 }
 
-int		takefrombuffer(const int fd, char **files, char **line)
+int				takefrombuffer(const int fd, int n, char **files, char **line)
 {
-	int		n;
-	char	*swap2;
+	char		*swap2;
 
-	n = strchr_int(files[fd], 10);
 	if (n >= 0)
 	{
 		*line = ft_memalloc(n + 1);
 		*line = ft_strncpy(*line, files[fd], n);
-		swap2 = ft_memalloc((ft_strlen(files[fd]) - n) + 1);
-		swap2 = strsubcpy(swap2, files[fd], (ft_strlen(files[fd]) - n), n + 1, 's');
-		free(files[fd]);		
+		swap2 = ft_strsub(files[fd], n + 1, (ft_strlen(files[fd]) - n));
+		free(files[fd]);
 		files[fd] = ft_memalloc(ft_strlen(swap2) + 1);
 		files[fd] = ft_strcpy(files[fd], swap2);
 		free(swap2);
@@ -108,43 +64,60 @@ int		takefrombuffer(const int fd, char **files, char **line)
 	return (0);
 }
 
-int		get_next_line(const int fd, char **line)
+int				firstread(const int fd, int n, char **line, char **files)
 {
-	static char		*files[4864];
-	char			*swap2;
-	int				n;
+	char		*swap2;
 
-	if (files[fd])
+	if (n >= 0)
 	{
-		if (takefrombuffer(fd, files, line) == 1)
-			return (1);
-		else
-			while (read_and_combine(fd, files) == 1)
-				if (takefrombuffer(fd, files, line) == 1)
-					return (1);
+		*line = ft_strsub(files[fd], 0, n);
+		swap2 = ft_strsub(files[fd], n + 1, (ft_strlen(files[fd]) - n));
+		free(files[fd]);
+		files[fd] = ft_strdup(swap2);
+		free(swap2);
+		return (1);
 	}
 	else
 	{
-		files[fd] = ft_memalloc(BUFF_SIZE + 1);
-		if (read(fd, files[fd], BUFF_SIZE) == 0)
-			return (0);
-		n = strchr_int(files[fd], 10);
-		if (n >= 0)
+		while (read_and_combine(fd, files) == 1)
 		{
-			*line = ft_memalloc(n + 1);
-			*line = ft_strncpy(*line, files[fd], n);
-			swap2 = ft_memalloc((ft_strlen(files[fd]) - n) + 1);
-			swap2 = strsubcpy(swap2, files[fd], (ft_strlen(files[fd]) - n), n + 1, 's');
-			free(files[fd]);
-			files[fd] = ft_memalloc(ft_strlen(swap2) + 1);
-			files[fd] = ft_strcpy(files[fd], swap2);
-			free(swap2);
-			return (1);
+			n = strchr_int(files[fd], 10);
+			if (takefrombuffer(fd, n, files, line) == 1)
+				return (1);
 		}
-		else
-			while (read_and_combine(fd, files) == 1)
-				if (takefrombuffer(fd, files, line) == 1)
-					return (1);
+		if (read_and_combine(fd, files) == 0)
+			return (ft_strlen(files[fd]) > 0 ?
+					takefrombuffer(fd, ft_strlen(files[fd]), files, line) : 0);
 	}
 	return (0);
+}
+
+int				get_next_line(const int fd, char **line)
+{
+	static char	*files[4864];
+	int			n;
+
+	if (files[fd])
+	{
+		n = strchr_int(files[fd], 10);
+		if (takefrombuffer(fd, n, files, line) == 1)
+			return (1);
+		else
+		{
+			while (read_and_combine(fd, files) == 1)
+			{
+				n = strchr_int(files[fd], 10);
+				if (takefrombuffer(fd, n, files, line) == 1)
+					return (1);
+			}
+			if (read_and_combine(fd, files) == 0)
+				if (ft_strlen(files[fd]) > 0)
+					return (takefrombuffer(fd,
+								ft_strlen(files[fd]), files, line));
+		}
+	}
+	files[fd] = ft_memalloc(BUFF_SIZE + 1);
+	read(fd, files[fd], BUFF_SIZE);
+	n = strchr_int(files[fd], 10);
+	return (firstread(fd, n, line, files));
 }
