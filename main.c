@@ -19,11 +19,9 @@ int		main(int argc, char **argv)
 	char	*line;
 	int	fd;
 
-	printf("started\n");
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		printf("FD: %d\n", fd);
 		while (get_next_line(fd, &line) == 1)
 		{
 			printf("%s\n", line);
