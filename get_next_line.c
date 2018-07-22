@@ -13,14 +13,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-int	gnewline(const int fd, char **files)
-{
-	files[fd] = ft_memalloc(BUFF_SIZE + 1);
-	if (read(fd, files[fd], BUFF_SIZE) == 0)
-		return (0);
-	return (1);
-}
-
 int			strchr_int(const char *s, int c)
 {
 	int		i;
@@ -75,7 +67,8 @@ int	read_and_combine(const int fd, char **files)
 	swap2 = ft_memalloc(ft_strlen(files[fd]) + 1);
 	swap2 = ft_strcpy(swap2, files[fd]);
 	free(files[fd]);
-	if (gnewline(fd, files) == 0)
+	files[fd] = ft_memalloc(BUFF_SIZE + 1);
+	if (read(fd, files[fd], BUFF_SIZE) == 0)
 	{
 		free(swap2);
 		return (0);
@@ -131,7 +124,8 @@ int		get_next_line(const int fd, char **line)
 	}
 	else
 	{
-		if (gnewline(fd, files) == 0)
+		files[fd] = ft_memalloc(BUFF_SIZE + 1);
+		if (read(fd, files[fd], BUFF_SIZE) == 0)
 			return (0);
 		n = strchr_int(files[fd], 10);
 		if (n >= 0)
