@@ -6,11 +6,11 @@
 /*   By: calamber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/30 19:38:09 by calamber          #+#    #+#             */
-/*   Updated: 2018/07/22 01:43:14 by calamber         ###   ########.fr       */
+/*   Updated: 2018/07/22 19:26:42 by calamber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl.h"
+#include "get_next_line.h"
 
 int				strchr_int(const char *s, int c)
 {
@@ -69,7 +69,8 @@ int				firstread(const int fd, char **line, char **files)
 	int			n;
 
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
-	read(fd, files[fd], BUFF_SIZE);
+	if (!(read(fd, files[fd], BUFF_SIZE) > 0))
+		return (-1);
 	n = strchr_int(files[fd], 10);
 	if (n >= 0)
 		return (takefrombuffer(fd, n, files, line));
@@ -93,6 +94,8 @@ int				get_next_line(const int fd, char **line)
 	static char	*files[4864];
 	int			n;
 
+	if (fd < 0)
+		return (-1);
 	if (files[fd])
 	{
 		n = strchr_int(files[fd], 10);
