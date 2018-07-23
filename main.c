@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "gnl.h"
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -26,6 +26,18 @@ int		main(int argc, char **argv)
 		{
 			printf("%s\n", line);
 			free(line);
+		}
+	}
+	else
+	{
+		fd = 0;
+		while (get_next_line(fd, &line) == 1)
+		{
+			if (line)
+			{
+				printf("%s\n", line);
+				free(line);
+			}
 		}
 	}
 	return (0);

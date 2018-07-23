@@ -1,6 +1,6 @@
 NAME = getnl
 
-SRC = main.c get_next_line.c
+SRC =  main.c get_next_line.c
 
 OBJ = $(SRC:.c=.o)
 
