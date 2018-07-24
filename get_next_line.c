@@ -98,7 +98,7 @@ int				get_next_line(const int fd, char **line)
 	static char	*files[4864];
 	int			n;
 
-	if (fd < 0)
+	if (fd < 0 && fd > 4864)
 		return (-1);
 	if (files[fd])
 	{
