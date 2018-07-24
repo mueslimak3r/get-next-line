@@ -23,14 +23,13 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		close(fd);
 		while ((ret = get_next_line(fd, &line)) > 0)
 		{
-			printf("ret= %d ", ret);
+			/*printf("ret= %d ", ret);*/
 			printf("%s\n", line);
 			free(line);
 		}
-		printf("ret= %d\n", ret);
+		/*printf("ret= %d\n", ret);*/
 	}
 	else
 	{
@@ -39,12 +38,12 @@ int		main(int argc, char **argv)
 		{
 			if (line)
 			{
-				printf("ret= %d ", ret);
+				/*printf("ret= %d ", ret);*/
 				printf("%s\n", line);
 				free(line);
 			}
 		}
-		printf("ret= %d\n", ret);
+		/*printf("ret= %d\n", ret);*/
 	}
 	return (0);
 }

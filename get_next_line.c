@@ -67,8 +67,9 @@ int				takefrombuffer(const int fd, int n, char **files, char **line)
 int				firstread(const int fd, char **line, char **files)
 {
 	int			n;
+
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
-	if (!(read(fd, files[fd], BUFF_SIZE) > 0))
+	if (read(fd, files[fd], BUFF_SIZE) < 1)
 	{
 		free(files[fd]);
 		if (read(fd, files[fd], 0) < 0)
@@ -98,7 +99,7 @@ int				get_next_line(const int fd, char **line)
 	static char	*files[4864];
 	int			n;
 
-	if (fd < 0 && fd > 4864)
+	if (fd < 0)
 		return (-1);
 	if (files[fd])
 	{
