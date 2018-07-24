@@ -67,10 +67,14 @@ int				takefrombuffer(const int fd, int n, char **files, char **line)
 int				firstread(const int fd, char **line, char **files)
 {
 	int			n;
-
 	files[fd] = ft_memalloc(BUFF_SIZE + 1);
 	if (!(read(fd, files[fd], BUFF_SIZE) > 0))
-		return (-1);
+	{
+		free(files[fd]);
+		if (read(fd, files[fd], 0) < 0)
+			return (-1);
+		return (0);
+	}
 	n = strchr_int(files[fd], 10);
 	if (n >= 0)
 		return (takefrombuffer(fd, n, files, line));
